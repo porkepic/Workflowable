@@ -16,7 +16,7 @@
 module Workflowable
     class Workflow < ActiveRecord::Base
         has_many :stages, :inverse_of=>:workflow
-        belongs_to :initial_stage, :class_name=>Stage
+        belongs_to :initial_stage, :class_name=>"Stage"
         has_many :workflow_actions, -> { order("position ASC") }
         has_many :actions, :through=>:workflow_actions
         accepts_nested_attributes_for :stages, :allow_destroy => true
