@@ -130,7 +130,7 @@ module Workflowable
           workflow.run_workflow_actions(options[:global], self, self.stage, new_stage, user)
           stage.run_after_actions(options[:after], self, new_stage, user) if stage
           new_stage.run_before_actions(options[:before], self, self.stage, user)
-          update_attributes(stage_id: new_stage.id)
+          update(stage_id: new_stage.id)
           return true
         end
       end

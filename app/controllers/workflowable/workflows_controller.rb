@@ -66,7 +66,7 @@ module Workflowable
 
 
       respond_to do |format|
-        if @workflow.update_attributes(workflow_params)
+        if @workflow.update(workflow_params)
           format.html { redirect_to @workflow, notice: 'Workflow was successfully updated.' }
           format.json { head :no_content }
         else
