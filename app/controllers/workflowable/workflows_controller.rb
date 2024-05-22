@@ -20,7 +20,12 @@ module Workflowable
     before_action :load_workflow, only: [:show, :edit, :update, :destroy, :stages, :configure_stages]
 
     def index
-      @workflows = Workflowable::Workflow.includes(:stages, :workflow_actions, :actions).order(:name)
+      @workflows = Workflowable::Workflow.includes(
+        stages: [:stage_next_steps, :next_steps, :stage_previous_steps, :previous_steps, 
+                :before_stage_actions, :after_stage_actions, :before_actions, :after_actions],
+        workflow_actions: {},
+        actions: [:workflow_actions, :workflows, :stage_actions, :stages]
+        ).order(:name)
     end
 
     def new
