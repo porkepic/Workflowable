@@ -136,7 +136,12 @@ module Workflowable
     end
 
     def load_workflow
-      @workflow = Workflow.find(params[:id])
+      @workflow = Workflow.includes(
+        stages: [:stage_next_steps, :next_steps, :stage_previous_steps, :previous_steps, 
+                :before_stage_actions, :after_stage_actions, :before_actions, :after_actions],
+        workflow_actions: {},
+        actions: [:workflow_actions, :workflows, :stage_actions, :stages]
+      ).find(params[:id])
     end
   end
 
